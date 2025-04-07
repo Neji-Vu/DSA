@@ -20,6 +20,7 @@ void MySolution(int n) {
 	vector<int> f;
 	vector<int> s;
 
+	// 1 2 3 4 5 6 | 7 8 9 10 11 12
 	if (n % 2 == 0) {
 		for (int i = 1; i <= n / 2; i++) {
 			if (i % 2 == 0) {
@@ -30,7 +31,9 @@ void MySolution(int n) {
 				s.push_back(n - i + 1);
 			}
 		}
-	} else {
+	}
+	// 1 2 3 | 4 5 6 7
+	else {
 		for (int i = 1; i <= (n - 1) / 2; ++i) {
 			if (i % 2 == 0) {
 				f.push_back(i);
