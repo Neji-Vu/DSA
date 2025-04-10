@@ -39,7 +39,7 @@ ll fib_bottom_up(int n) {
 	return dp_bottom_up[n];
 }
 
-ll fib_bottom_up_optimization(int n) {
+ll fib_bottom_up_optimized(int n) {
 	if (n <= 1)
 		return n;
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 	printf("Time taken: %fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
 	tStart = clock();
-	cout << fib_bottom_up_optimization(n) << endl;
+	cout << fib_bottom_up_optimized(n) << endl;
 	printf("Time taken: %fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
 	return 0;
