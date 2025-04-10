@@ -74,18 +74,18 @@ int main(int argc, char **argv) {
 	// cout << recursion(n) << endl;
 	// printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
 
-	dp_td[0] = 1;
-	tStart = clock();
-	cout << top_down_recursion(n) << endl;
-	printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
-
-	tStart = clock();
-	cout << bottom_up(n) << endl;
-	printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
-
-	tStart = clock();
+	// dp_td[0] = 1;
+	// tStart = clock();
+	// cout << top_down_recursion(n) << endl;
+	// printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
+	//
+	// tStart = clock();
+	// cout << bottom_up(n) << endl;
+	// printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
+	//
+	// tStart = clock();
 	cout << bottom_up_optimized(n) << endl;
-	printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
+	// printf("%fs\n", (float)(clock() - tStart) / CLOCKS_PER_SEC);
 
 	return 0;
 }
