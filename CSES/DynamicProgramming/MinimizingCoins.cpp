@@ -29,7 +29,6 @@ int recursive(int *c, int x, int size) {
 	return ans == INT_MAX ? -1 : ans;
 }
 
-// Time limit exceeded
 int dp_top_down[mxN + 1];
 int top_down_recursive(int *c, int x, int size) {
 	if (x < 0)
@@ -40,7 +39,7 @@ int top_down_recursive(int *c, int x, int size) {
 
 	int ans = INT_MAX;
 	for (int i = 0; i < size; ++i) {
-		int val = recursive(c, x - c[i], size);
+		int val = top_down_recursive(c, x - c[i], size);
 		if (val != -1)
 			ans = min(ans, val + 1);
 	}
@@ -78,13 +77,13 @@ int main(int argc, char **argv) {
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 	//
 	// tStart = clock();
-	// for (int i = 0; i <= x; ++i)
-	// 	dp_top_down[i] = INT_MAX;
-	// dp_top_down[0] = 0;
-	// cout << top_down_recursive(c, x, n) << endl;
+	for (int i = 0; i <= x; ++i)
+		dp_top_down[i] = INT_MAX;
+	dp_top_down[0] = 0;
+	cout << top_down_recursive(c, x, n) << endl;
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
-	cout << bottom_up(c, x, n);
+	// cout << bottom_up(c, x, n);
 
 	return 0;
 }
