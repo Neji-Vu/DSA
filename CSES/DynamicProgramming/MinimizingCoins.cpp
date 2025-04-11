@@ -48,6 +48,22 @@ int top_down_recursive(int *c, int x, int size) {
 	return dp_top_down[x];
 }
 
+int bottom_up_YTB(int *c, int x, int size) {
+	int dp[x + 1];
+	dp[0] = 0;
+
+	for (int i = 1; i <= x; ++i) {
+		dp[i] = 1e9;
+		for (int j = 0; j < size; ++j) {
+			if (i - c[j] >= 0) {
+				dp[i] = min(dp[i], dp[i - c[j]] + 1);
+			}
+		}
+	}
+
+	return dp[x] == 1e9 ? -1 : dp[x];
+}
+
 int bottom_up(int *c, int x, int size) {
 	int dp[x + 1];
 	dp[0] = 0;
