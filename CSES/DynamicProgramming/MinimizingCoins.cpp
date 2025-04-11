@@ -53,13 +53,13 @@ int bottom_up(int *c, int x, int size) {
 	dp[0] = 0;
 
 	for (int i = 1; i <= x; ++i) {
-		int current = INT_MAX;
+		dp[i] = INT_MAX;
 		for (int j = 0; j < size; ++j) {
 			if (i - c[j] >= 0 && dp[i - c[j]] != -1) {
-				current = min(current, dp[i - c[j]] + 1);
+				dp[i] = min(dp[i], dp[i - c[j]] + 1);
 			}
 		}
-		dp[i] = current == INT_MAX ? -1 : current;
+		dp[i] = dp[i] == INT_MAX ? -1 : dp[i];
 	}
 
 	return dp[x];
@@ -77,13 +77,13 @@ int main(int argc, char **argv) {
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 	//
 	// tStart = clock();
-	for (int i = 0; i <= x; ++i)
-		dp_top_down[i] = INT_MAX;
-	dp_top_down[0] = 0;
-	cout << top_down_recursive(c, x, n) << endl;
+	// for (int i = 0; i <= x; ++i)
+	// 	dp_top_down[i] = INT_MAX;
+	// dp_top_down[0] = 0;
+	// cout << top_down_recursive(c, x, n) << endl;
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
-	// cout << bottom_up(c, x, n);
+	cout << bottom_up(c, x, n);
 
 	return 0;
 }
