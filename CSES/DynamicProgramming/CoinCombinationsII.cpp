@@ -3,6 +3,7 @@
  * Date:        2025 Apr 10 17:47:09
  * Description: Basic C++ program template
  ***********************************************/
+#include <algorithm>
 #include <climits>
 #include <ctime>
 #include <iostream>
@@ -12,7 +13,7 @@ using namespace std;
 const int mxN = 1e6;
 const int MOD = 1e9 + 7;
 
-int recursive(int *c, int x, int size) {
+int recursive(int *c, int x, int size, int pos = 0) {
 	if (x < 0)
 		return 0;
 
@@ -20,15 +21,15 @@ int recursive(int *c, int x, int size) {
 		return 1;
 
 	int ans = 0;
-	for (int i = 0; i < size; ++i) {
-		ans = (ans + recursive(c, x - c[i], size)) % MOD;
+	for (int i = pos; i < size; ++i) {
+		ans = (ans + recursive(c, x - c[i], size, i)) % MOD;
 	}
 
 	return ans;
 }
 
 int dp_top_down[mxN + 1];
-int top_down_recursive(int *c, int x, int size) {
+int top_down_recursive(int *c, int x, int size, int pos = 0) {
 	if (x < 0)
 		return 0;
 
@@ -36,8 +37,8 @@ int top_down_recursive(int *c, int x, int size) {
 		return dp_top_down[x];
 
 	int ans = 0;
-	for (int i = 0; i < size; ++i) {
-		ans = (ans + top_down_recursive(c, x - c[i], size)) % MOD;
+	for (int i = pos; i < size; ++i) {
+		ans = (ans + top_down_recursive(c, x - c[i], size, i)) % MOD;
 	}
 
 	dp_top_down[x] = ans;
@@ -67,8 +68,10 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < n; ++i)
 		cin >> c[i];
 
+	sort(c, c + n);
+
 	// clock_t tStart = clock();
-	// cout << recursive(c, x, n) << endl;
+	cout << recursive(c, x, n) << endl;
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 
 	// tStart = clock();
@@ -78,7 +81,7 @@ int main(int argc, char **argv) {
 	cout << top_down_recursive(c, x, n) << endl;
 	// printf("%fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 	//
-	cout << bottom_up(c, x, n);
+	// cout << bottom_up(c, x, n);
 
 	return 0;
 }
