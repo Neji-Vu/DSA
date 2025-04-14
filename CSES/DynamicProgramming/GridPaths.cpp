@@ -3,7 +3,6 @@
  * Date:        2025 Apr 12 17:32:25
  * Description: Basic C++ program template
  ***********************************************/
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -37,13 +36,15 @@ int top_down_recursive(vector<string> &s, int x, int y) {
 }
 
 int bottom_up(vector<string> &s, int x, int y) {
-	int dp[mxN + 1][mxN + 1]{{0}};
+	int dp[mxN + 1][mxN + 1]{};
 	dp[s.size() - 1][s.size() - 1] = 1;
 
 	for (int i = s.size() - 1; i >= 0; --i) {
 		for (int j = s.size() - 1; j >= 0; --j) {
+			if (i == s.size() - 1 && j == s.size() - 1)
+				continue;
 			if (dp[i][j] != '*')
-				dp[i][j] = (dp[i][j] + dp[i + 1][j] + dp[i][j + 1]) / MOD;
+				dp[i][j] = (dp[i + 1][j] + dp[i][j + 1]) % MOD;
 		}
 	}
 
