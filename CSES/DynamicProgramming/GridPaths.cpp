@@ -37,18 +37,21 @@ int top_down_recursive(vector<string> &s, int x, int y) {
 
 int bottom_up(vector<string> &s, int x, int y) {
 	int dp[mxN + 1][mxN + 1]{};
-	dp[s.size() - 1][s.size() - 1] = 1;
+	dp[0][0] = 1;
 
-	for (int i = s.size() - 1; i >= 0; --i) {
-		for (int j = s.size() - 1; j >= 0; --j) {
-			if (i == s.size() - 1 && j == s.size() - 1)
-				continue;
-			if (dp[i][j] != '*')
-				dp[i][j] = (dp[i + 1][j] + dp[i][j + 1]) % MOD;
+	for (int i = 0; i < s.size(); ++i) {
+		for (int j = 0; j < s.size(); ++j) {
+			if (i)
+				dp[i][j] += dp[i - 1][j];
+			if (j)
+				dp[i][j] += dp[i][j - 1];
+			dp[i][j] %= MOD;
+			if (s[i][j] == '*')
+				dp[i][j] = 0;
 		}
 	}
 
-	return dp[x][y];
+	return dp[s.size() - 1][s.size() - 1];
 }
 
 int main(int argc, char **argv) {
@@ -60,12 +63,12 @@ int main(int argc, char **argv) {
 
 	// cout << recursive(s, 0, 0) << endl;
 
-	for (int i = 0; i < n; ++i)
-		for (int j = 0; j < n; ++j)
-			dp_top_down[i][j] = -1;
-
-	dp_top_down[n - 1][n - 1] = 1;
-	cout << top_down_recursive(s, 0, 0) << endl;
+	// for (int i = 0; i < n; ++i)
+	// 	for (int j = 0; j < n; ++j)
+	// 		dp_top_down[i][j] = -1;
+	//
+	// dp_top_down[n - 1][n - 1] = 1;
+	// cout << top_down_recursive(s, 0, 0) << endl;
 
 	cout << bottom_up(s, 0, 0) << endl;
 
