@@ -12,6 +12,21 @@ int get_bit(int mask, int i) {
 	return (mask >> i) & 1;
 }
 
+ll best = 1e18;
+
+void recursive(int idx, ll sum_f, ll sum_s, ll *p, int size) {
+	if (idx == size) {
+		best = min(best, abs(sum_f - sum_s));
+		return;
+	}
+
+	// Case 1: put p[idx] in group_f
+	recursive(idx + 1, sum_f + p[idx], sum_s, p, size);
+
+	// Case 2: put p[idx] in group_s
+	recursive(idx + 1, sum_f, sum_s + p[idx], p, size);
+}
+
 int main(int argc, char **argv) {
 	int n;
 	ll p[20];
@@ -57,7 +72,10 @@ int main(int argc, char **argv) {
 		ans = min(ans, abs(sum_f - sum_s));
 	}
 
-	cout << ans;
+	cout << ans << endl;
+
+	recursive(0, 0, 0, p, n);
+	cout << best << endl;
 
 	return 0;
 }
