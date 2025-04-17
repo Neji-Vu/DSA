@@ -29,6 +29,20 @@ int recursive(int price, int idx) {
 	return maxPage;
 }
 
+int knapsack_recursive(int idx, int totalVal, int maxWeight) {
+	if (totalVal > price)
+		return 0;
+
+	if (idx < 0)
+		return maxWeight;
+
+	int take = knapsack_recursive(idx - 1, totalVal + h[idx - 1], maxWeight + s[idx - 1]);
+
+	int skipped = knapsack_recursive(idx - 1, totalVal, maxWeight);
+
+	return max(take, skipped);
+}
+
 int main(int argc, char **argv) {
 
 	cin >> n >> price;
@@ -53,7 +67,8 @@ int main(int argc, char **argv) {
 	}
 
 	cout << max_page << endl;
-	cout << recursive(price, 0);
+	cout << recursive(price, 0) << endl;
+	cout << knapsack_recursive(n, 0, 0);
 
 	return 0;
 }
