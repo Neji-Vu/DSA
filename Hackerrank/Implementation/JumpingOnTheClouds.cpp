@@ -1,6 +1,6 @@
 /***********************************************
  * File:        JumpingOnTheClouds.cpp
- * Date:        2025 Feb 27 15:00:25
+ * Date:        2025 Apr 22 16:46:23
  * Description: Basic C++ program template
  ***********************************************/
 #include <iostream>
@@ -8,21 +8,21 @@
 using namespace std;
 #define ll long long
 
-int main(int argc, char **argv) {
-	int n, k;
+int n;
+int c[100]{0};
 
-	cin >> n >> k;
-	bool c[n];
-	for (int i = 0; i < n; i++)
+int main(int argc, char **argv) {
+	cin >> n;
+	for (int i = 0; i < n; ++i)
 		cin >> c[i];
 
-	int e{100}, i = 0;
+	int idx = 0, ans = 0;
 	do {
-		e -= 1 + c[i] * 2;
-		i = (i + k) % n;
-	} while (i != 0);
+		++ans;
+		idx += (c[idx + 2] != 1 ? 2 : 1);
+	} while (idx < n - 1);
 
-	cout << e;
+	cout << ans;
 
 	return 0;
 }
