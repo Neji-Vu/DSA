@@ -20,17 +20,7 @@ int main(int argc, char **argv) {
 		++h[temp];
 	}
 
-	int max = *max_element(h, h + 101), ans = 0;
-	bool flag = true;
-	for (int i = 1; i <= 100; ++i) {
-		if (h[i] == max && flag) {
-			flag = false;
-			continue;
-		}
-		ans += h[i];
-	}
-
-	cout << ans;
+	cout << n - *max_element(h, h + 101);
 
 	return 0;
 }
