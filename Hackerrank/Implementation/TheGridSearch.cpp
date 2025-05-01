@@ -32,8 +32,6 @@ int main(int argc, char **argv) {
 			}
 		}
 
-		int ok = 0;
-
 		bool found = false;
 		for (int i = 0; i <= R - r; ++i) {
 			for (int j = 0; j <= C - c; ++j) {
