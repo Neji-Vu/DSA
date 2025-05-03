@@ -38,24 +38,35 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-	for (int i = 3; i <= n; i += 2) {
-		vector<string> temp(r, string(c, 'O'));
-		for (int row = 0; row < r; ++row) {
-			for (int col = 0; col < c; ++col) {
-				if (g[row][col] == 'O') {
-					temp[row][col] = '.';
-					for (int k = 0; k < 4; ++k) {
-						if (e(row + dx[k], col + dy[k])) {
-							temp[row + dx[k]][col + dy[k]] = '.';
-						}
+	vector<string> first(r, string(c, 'O'));
+	for (int row = 0; row < r; ++row) {
+		for (int col = 0; col < c; ++col) {
+			if (g[row][col] == 'O') {
+				first[row][col] = '.';
+				for (int k = 0; k < 4; ++k) {
+					if (e(row + dx[k], col + dy[k])) {
+						first[row + dx[k]][col + dy[k]] = '.';
 					}
 				}
 			}
 		}
-		g = temp;
 	}
 
-	for (string s : g)
+	vector<string> second(r, string(c, 'O'));
+	for (int row = 0; row < r; ++row) {
+		for (int col = 0; col < c; ++col) {
+			if (first[row][col] == 'O') {
+				second[row][col] = '.';
+				for (int k = 0; k < 4; ++k) {
+					if (e(row + dx[k], col + dy[k])) {
+						second[row + dx[k]][col + dy[k]] = '.';
+					}
+				}
+			}
+		}
+	}
+
+	for (string s : (n % 4 == 3) ? first : second)
 		cout << s << endl;
 
 	return 0;
