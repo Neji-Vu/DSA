@@ -22,24 +22,47 @@ int main(int argc, char **argv) {
 		for (int i = 1; i <= n; ++i)
 			a[i] = i;
 
-		bool flag = true;
-		do {
-			for (int i = 1; i <= n; ++i) {
-				if (abs(a[i] - i) != k) {
-					flag = false;
-					break;
-				}
-				flag = true;
-			}
-			if (flag)
-				break;
-		} while (next_permutation(a + 1, a + n + 1));
-		if (!flag)
-			cout << "-1";
-		else
+		if (k == 0) {
 			for (int i = 1; i <= n; ++i)
-				cout << a[i] << " ";
+				cout << i << " ";
+			cout << endl;
+			continue;
+		}
+
+		if (n % (2 * k) != 0) {
+			cout << "-1" << endl;
+			continue;
+		}
+
+		bool add = true;
+		for (int i = 1; i <= n; ++i) {
+			if (add)
+				cout << i + k << " ";
+			else
+				cout << i - k << " ";
+			if (i % k == 0)
+				add = !add;
+		}
 		cout << endl;
+
+		// bool flag = true;
+		// do {
+		// 	for (int i = 1; i <= n; ++i) {
+		// 		if (abs(a[i] - i) != k) {
+		// 			flag = false;
+		// 			break;
+		// 		}
+		// 		flag = true;
+		// 	}
+		// 	if (flag)
+		// 		break;
+		// } while (next_permutation(a + 1, a + n + 1));
+		// if (!flag)
+		// 	cout << "-1";
+		// else
+		// 	for (int i = 1; i <= n; ++i)
+		// 		cout << a[i] << " ";
+		// cout << endl;
 	}
 
 	return 0;
