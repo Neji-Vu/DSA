@@ -4,6 +4,7 @@
  * Description: Basic C++ program template
  ***********************************************/
 #include <array>
+#include <functional>
 #include <iostream>
 #include <utility>
 
@@ -17,7 +18,7 @@ void print(array<int, 10> arr) {
 		cout << arr[i] << " ";
 	}
 
-	cout << endl << endl;
+	cout << endl;
 }
 
 array<int, 10> BubbleSort() {
@@ -51,11 +52,47 @@ array<int, 10> InsertionSort() {
 	return ret;
 }
 
+array<int, 10> SelectionSort() {
+	array<int, 10> ret = a;
+
+	cout << "Selection Sort:\n";
+	for (int i = 0; i < ret.size(); ++i) {
+		int pos_min = i;
+		for (int j = i + 1; j < ret.size(); ++j) {
+			if (ret[j] < ret[pos_min])
+				pos_min = j;
+		}
+		if (pos_min != i)
+			swap(ret[i], ret[pos_min]);
+	}
+
+	return ret;
+}
+
+void merge(array<int, 10> &a, int left, int mid, int right) {}
+
+void MergeSort(array<int, 10> &a, int left, int right) {
+	if (left == right)
+		return;
+
+	int mid = left + (right + left) / 2;
+
+	MergeSort(a, left, mid);
+	MergeSort(a, mid + 1, right);
+	merge(a, left, mid, right);
+}
+
 int main(int argc, char **argv) {
 	print(a);
 
 	print(BubbleSort());
 	print(InsertionSort());
+	print(SelectionSort());
+
+	cout << "Merge Sort:\n";
+	array<int, 10> temp = a;
+	MergeSort(temp, 0, temp.size() - 1);
+	print(temp);
 
 	return 0;
 }
